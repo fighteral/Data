@@ -67,35 +67,45 @@ class Data_Mining_Beta_Version:
 
 
         if m == "boxplot":
-           sns.boxplot(X,Y,data=self.df)
+           k=sns.boxplot(X,Y,data=self.df)
+           k.savefig("text.pdf")
            pyt.show()
         elif m=="barplot":
-            sns.barplot(X,Y,data=self.df)
+            k=sns.barplot(X,Y,data=self.df)
+            k.savefig("text.pdf")
             pyt.show()
         elif m=="countplot":
-            sns.countplot(X, data=self.df)
+            k=sns.countplot(X, data=self.df)
+            k.savefig("text.pdf")
             pyt.show()
         elif m=="violinplot":
-            sns.violinplot(X,Y,data=self.dff, palette='rainbow')
+            k=sns.violinplot(X,Y,data=self.dff, palette='rainbow')
+            k.savefig("text.pdf")
             pyt.show()
         elif m=="distplot":
-            sns.distplot(self.df['X'])
+            k=sns.distplot(self.df['X'])
+            k.savefig("text.pdf")
             pyt.show()
         elif m=="jointplot":
-            sns.jointplot(X,Y,data=self.df, kind='hex')
+            k=sns.jointplot(X,Y,data=self.df, kind='hex')
+            k.savefig("text.pdf")
             pyt.show()
         elif m=="lmplpot":
-            sns.lmplot(X,Y,data=self.df)
+            k=sns.lmplot(X,Y,data=self.df)
+            k.savefig("text.pdf")
             pyt.show()
         elif m=="clustermap":
-            sns.clustermap(self.df.corr())
+            k=sns.clustermap(self.df.corr())
+            k.savefig("text.pdf")
             pyt.show()
         elif m=="heatmap":
-            sns.heatmap(self.df.corr())
+            k=sns.heatmap(self.df.corr())
+            k.savefig("text.pdf")
             pyt.show()
 
     def pairplot(self):
-        sns.pairplot(data=self.df)
+        k=sns.pairplot(data=self.df)
+        k.savefig("text.pdf")
         pyt.show()
     #     isko call krlena
 
