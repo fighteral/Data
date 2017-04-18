@@ -6,8 +6,8 @@
 import sys
 
 
-from tkinter import *
-from tkinter import filedialog
+from Tkinter import *
+from tkFileDialog import *
 
 try:
     import ttk
@@ -45,7 +45,7 @@ def destroy_Data_Mining__Beta_Version():
     w = None
 
 def browsefunc():
-    filename = filedialog.askopenfilename()
+    filename =askopenfilename()
     print(filename)
 
 
