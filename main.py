@@ -4,7 +4,11 @@
 # In conjunction with Tcl version 8.6
 #    Apr 18, 2017 11:08:14 PM
 import sys
+import numpy as np
+import pandas as pd
 
+import matplotlib.pyplot as pyt
+import seaborn as sns
 
 from Tkinter import *
 from tkFileDialog import *
@@ -44,15 +48,107 @@ def destroy_Data_Mining__Beta_Version():
     w.destroy()
     w = None
 
-def browsefunc():
-    filename =askopenfilename()
-    print(filename)
+
 
 
 class Data_Mining_Beta_Version:
+    z=["USA_Housing","csv"]
+    filename="/home/fighteral/PycharmProjects/untitled/USA_Housing.csv"
+    x=[]
+    graph_list=["boxplot","barplot","countplot","distplot","jointplot","lmplot","clustermap","heatmap","violinplot"]
+    df=None                                                                                                                                                                                                     
+
+
+    def graph(self):
+        #user will select m
+
+
+        m = "heatmap"
+
+
+        if m == "boxplot":
+           sns.boxplot(X,Y,data=self.df)
+           pyt.show()
+        elif m=="barplot":
+            sns.barplot(X,Y,data=self.df)
+            pyt.show()
+        elif m=="countplot":
+            sns.countplot(X, data=self.df)
+            pyt.show()
+        elif m=="violinplot":
+            sns.violinplot(X,Y,data=self.dff, palette='rainbow')
+            pyt.show()
+        elif m=="distplot":
+            sns.distplot(self.df['X'])
+            pyt.show()
+        elif m=="jointplot":
+            sns.jointplot(X,Y,data=self.df, kind='hex')
+            pyt.show()
+        elif m=="lmplpot":
+            sns.lmplot(X,Y,data=self.df)
+            pyt.show()
+        elif m=="clustermap":
+            sns.clustermap(self.df.corr())
+            pyt.show()
+        elif m=="heatmap":
+            sns.heatmap(self.df.corr())
+            pyt.show()
+
+    def pairplot(self):
+        sns.pairplot(data=self.df)
+        pyt.show()
+    #     isko call krlena
+
+
+    def browsefunc(self):
+        try:
+
+            self.filename = askopenfilename()
+
+            y=self.filename.split("/")
+            self.z=y[len(y)-1].split(".")
+
+        except Exception as e:
+            print "provide valid file name"
+
+
+    def test(self):
+        self.x=[]
+
+        try:
+
+            if(self.z[1] == "csv"):
+                self.df=pd.read_csv(self.filename)
+
+                for g in self.df.columns:
+                    self.x.append(g)
+
+
+
+
+            elif (self.z[1] == "xlsx"):
+                df = pd.read_excel(self.filename,sheetname=1)
+
+
+
+            elif (self.z[1] == "sql"):
+                from sqlalchemy import create_engine
+                engine = create_engine('sqlite:///:memory:')
+                sql_df = pd.read_sql('data', con=engine)
+
+                print "feffnjkd"
+            else:
+                print "Enter the valid data"
+            self.graph()
+            # self.pairplot()
+        except Exception as e:
+            print "edfved"
+
+
+
     def __init__(self, top=None):
-        '''This class configures and populates the toplevel window.
-           top is the toplevel containing window.'''
+
+        '''This class configures and populates the toplevel window.top is the toplevel containing window.'''
         _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
         _fgcolor = '#000000'  # X11 color: 'black'
         _compcolor = '#d9d9d9' # X11 color: 'gray85'
@@ -88,7 +184,7 @@ class Data_Mining_Beta_Version:
         self.Browse.configure(takefocus="")
         self.Browse.configure(text='''Browse''')
         self.Browse.configure(cursor="hand2")
-        self.Browse.configure(command=browsefunc)
+        self.Browse.configure(command=self.browsefunc)
 
 
         self.Path = ttk.Label(top)
@@ -104,6 +200,7 @@ class Data_Mining_Beta_Version:
         self.Explore.configure(takefocus="")
         self.Explore.configure(text='''Explore''')
         self.Explore.configure(cursor="hand2")
+        self.Explore.configure(command=self.test)
 
         self.Explore_analze = ttk.Button(top)
         self.Explore_analze.place(relx=0.5, rely=0.37, height=25, width=105)
